@@ -1,0 +1,25 @@
+# Codim-2 Companion — Python dependencies
+#
+# For Python deps only:   pip install -r requirements.txt
+# For everything (including native lib checks + install hints):
+#     python install.py
+#
+# Native libraries are NOT installed by pip:
+#   - libcairo (for cairosvg PNG render) — see install.py for platform-specific
+#     install commands. If you skip this, ch_40 and ch_04 will fall back to
+#     SVG-only output (PNGs are purely cosmetic; the pipeline runs fine).
+#   - pandoc + xelatex (for building Book.pdf / Book.epub) — needed only for
+#     book/_build/build_all.py, not for the pipeline itself.
+
+# Core (required)
+pyyaml>=6.0
+numpy>=1.21
+tqdm>=4.60
+rich>=13.0
+certifi>=2023.7  # SSL CA bundle — needed on Windows for data_tools/download.py
+
+# Optional (for ch_40 web graph PNG render + ch_04 codim grid PNG)
+# Requires libcairo natively; will install cleanly but raise OSError at
+# render time if libcairo is missing. The pipeline catches this and
+# continues with SVG-only output, so cairosvg is safe to install.
+cairosvg>=2.5
